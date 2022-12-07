@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+</head>
+<body>
+    <div class="box" id="heading">
+        <h1><%=listTitle%></h1>
+    </div>
+    
+    <div class="box">
+        
+            <%for(let i=0;i<tasknext.length;i++) {%>
+                <form action="/delete"  method="post">
+                    <div class="item">
+                        <input class ="checkkboxx" type="checkbox" value="<%=tasknext[i]._id%>"  name="checkbox" onchange="this.form.submit()">
+                        <p><%=tasknext[i].name%></p>
+                        <p><%=tasknext[i].date%></p>
+                        <p><%=tasknext[i].time%></p>
+                    </div>
+                    <input type="hidden" name="listName" value="<%=listTitle%>"></input>
+                    <input type="hidden" name="name" value="<%=tasknext[i].name%>"></input>
+                    <input type="hidden" name="time" value="<%=tasknext[i].time%>"></input>
+                    <input type="hidden" name="date" value="<%=tasknext[i].date%>"></input>
+                </form>
+            <%}%>
+            <form class="item" action="/" method="post">
+                <input type="text" name="nextTask"  placeholder="Next Task" autocomplete="off">
+                <button type="submit" name="list" value=<%=listTitle%> >+</button>
+            </form>
+                <!-- <button id="open">i</button>
+                <div class="modal-container" id="modal-container">
+                    <div class="modal">
+                        <h1>Entry Format</h1>
+                        <p>Task Name, Full Month, Date(DD), Year(YYYY), Time in 24Hours format (HH:MM)</p>
+                        <button id="close">x</button>
+                    </div>
+                </div> -->
+            <script src="index.js"></script>
+    </div>
+</body>
+</html>
