@@ -12,7 +12,7 @@ app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
-  mongoose.connect("mongodb+srv://rajat-mihsra:Rajat_39144@cluster0.qehtb.mongodb.net/todolistDB");
+  mongoose.connect("mongodb+srv://rajatmishra:tasktracker_123@cluster0.4xnw39l.mongodb.net/?retryWrites=true&w=majority");
 // mongoose.connect("mongodb://localhost:27017/todolistDB");
 
 const itemSchema= 
@@ -35,21 +35,6 @@ app.get("/",function(req,res)
    
    Item.find({},function(err,foundItems)
    {
-   //   if(foundItems.length===0)
-   //   {
-   //    Item.insertMany(defaultItems,function(err)
-   //    {
-   //        if(err)
-   //        {
-   //           console.log(err);
-   //        }
-   //        else 
-   //        {
-   //           console.log("Inserted!");
-   //        }
-   //    });
-   //    res.redirect("/");
-   //   }
       res.render("list",{listTitle:"Today", tasknext:foundItems});
    });
 });
