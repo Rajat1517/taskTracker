@@ -8,6 +8,9 @@ const prompt= require("prompt");
 const { Timestamp } = require("mongodb");
 const app= express();
 const {alert} = require("node-popup");
+const cron = require("cron");
+const https = require("https");
+
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
@@ -150,4 +153,16 @@ app.listen(3000,function()
 
 
 
-// https://mysterious-anchorage-21075.herokuapp.com/
+const job = new cron.CronJob("*/10 * * * *", ()=>{
+   https.get("https://trackingtasks.onrender.com", (res)=>{
+     if(res.statusCode==200)
+     {
+       console.log("server restarted");
+     }
+     else{
+       console.log("error in server restarting");
+     }
+   })
+})
+
+job.start();
